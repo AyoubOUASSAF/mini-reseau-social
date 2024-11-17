@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <!-- Barre latérale -->
-    <aside class="sidebar">
+      <!-- Barre latérale -->
+      <aside class="sidebar">
         <!-- Bouton pour la barre latérale -->
         <button id="menu-toggle">☰</button>
 
@@ -21,12 +21,30 @@
         <!-- Navigation principale -->
         <nav>
             <ul>
-                <li><a href="#feed">Accueil</a></li>
-                <li><a href="#messages">Conversations</a></li>
-                <li><a href="#friends">Amis</a></li>
+                <li>
+                    <!-- "Fil d'actualité" -->
+                    <a href="#feed">🏠 <span>Accueil</span></a>
+                </li>
+                <li>
+                    <!-- "Messagerie" -->
+                    <a href="#messages">💬 <span>Conversations</span></a>
+                </li>
+                <li>
+                    <!-- Lien vers la section "Liste d'amis" -->
+                    <a href="#friends">👥 <span>Ami(e)s</span></a>
+                </li>
             </ul>
         </nav>
     </aside>
+
+    <!-- Barre de navigation inférieure pour les appareils mobiles -->
+    <nav class="bottom-nav">
+        <ul>
+            <li><a href="#feed">🏠</a></li>
+            <li><a href="#messages">💬</a></li>
+            <li><a href="#friends">👥</a></li>
+        </ul>
+    </nav>
 
     <main>
         <!-- Section du fil d'actualité -->

@@ -532,3 +532,51 @@ input::placeholder {
     opacity: 1;
     pointer-events: auto;
 }
+
+/* Navigation pour mobile */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #4b0082;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+.bottom-nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .bottom-nav {
+        display: block;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    section {
+        padding-bottom: 4rem;
+    }
+}
