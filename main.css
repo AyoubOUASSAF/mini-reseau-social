@@ -580,3 +580,83 @@ input::placeholder {
         padding-bottom: 4rem;
     }
 }
+
+/* Conteneur pour les particules */
+.particle-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+}
+
+/* Particules individuelles */
+.particle {
+    font-size: 2rem;
+    opacity: 1;
+    transition: transform 1.5s ease, opacity 1.5s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Animation : déplace les particules vers le haut */
+.move-up {
+    animation: moveUp 1.5s forwards;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+/* Animation : déplace les particules vers le bas */
+.move-down {
+    animation: moveDown 1.5s forwards;
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+}
+
+/* Animation de rebond */
+.bounce {
+    animation: bounce 1.5s ease-in-out;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Effet au survol d'un bouton de réaction */
+.reaction-button:hover {
+    box-shadow: inset 4px 4px 8px #dcd6f7, inset -4px -4px 8px #ffffff;
+}
+
+/* Style pour un bouton de réaction sélectionné */
+.reaction-button.selected {
+    background-color: #4b0082;
+    color: #ffffff;
+    box-shadow: none;
+}

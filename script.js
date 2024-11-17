@@ -284,7 +284,7 @@ function ajouterReaction(postId, reactionType, button) {
         userReactions.set(userReactionKey, true); //  Suivre la réaction
         button.textContent = `${reactionType === "like" ? "👍" : reactionType === "dislike" ? "👎" : "❤️"} ${post.reactions[reactionType]}`;
         button.classList.add("clicked");
-        showParticleAnimation(button, reactionType);
+        afficherAnimation(button, reactionType);
     }
 }
 // Affiche la liste des conversations disponibles. 
@@ -408,7 +408,7 @@ function afficherAmis() {
             afficherConversationPourAmi(ami.nom);
         });
 
-        conteneurAmis.appendChild(amiElement); 
+        conteneurAmis.appendChild(amiElement);
     });
 }
 
@@ -435,7 +435,7 @@ function filtrerAmis() {
     const filtre = document.getElementById("friend-filter").value.toLowerCase();
     document.querySelectorAll("#friends-container .ami").forEach(ami => {
         const nom = ami.querySelector("p").textContent.toLowerCase();
-        ami.style.display = nom.includes(filtre) ? "flex" : "none"; 
+        ami.style.display = nom.includes(filtre) ? "flex" : "none";
     });
 }
 
@@ -446,7 +446,7 @@ function activerDragAndDrop() {
     let placeholder = null;
 
     container.querySelectorAll(".ami").forEach(ami => {
-        ami.draggable = true; 
+        ami.draggable = true;
 
         // Lorsque le glissement commence
         ami.addEventListener("dragstart", () => {
@@ -460,7 +460,7 @@ function activerDragAndDrop() {
             container.insertBefore(placeholder, ami.nextSibling);
 
             setTimeout(() => {
-                ami.style.display = "none"; 
+                ami.style.display = "none";
             }, 0);
         });
 
@@ -473,7 +473,7 @@ function activerDragAndDrop() {
             ami.style.gap = "0.5rem";
 
             if (placeholder) {
-                placeholder.remove(); 
+                placeholder.remove();
                 placeholder = null;
             }
             draggedItem = null;
@@ -513,14 +513,42 @@ document.querySelector(".search-icon").addEventListener("click", () => {
     const input = searchContainer.querySelector(".search-input");
 
     if (searchContainer.classList.contains("expanded")) {
-        input.focus(); 
+        input.focus();
     } else {
-        input.value = ""; 
-        filtrerAmis(); 
+        input.value = "";
+        filtrerAmis();
     }
 });
 
+// afficher Animation
+function afficherAnimation(button, type) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
 
+    // Définissez le contenu en fonction du type de réaction
+    particle.textContent = type === "like" ? "👍" : type === "dislike" ? "👎" : "❤️";
+
+    // Définir la position initiale par rapport au bouton
+    const rect = button.getBoundingClientRect();
+    particle.style.position = "fixed";
+    particle.style.left = `${rect.left + rect.width / 2}px`;
+    particle.style.top = `${rect.top}px`;
+
+    // Ajouter la classe d'animation
+    if (type === "like") {
+        particle.classList.add("move-up");
+    } else if (type === "dislike") {
+        particle.classList.add("move-down");
+    } else if (type === "love") {
+        particle.classList.add("bounce");
+    }
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, 1500);
+}
 // Initialisation 
 afficherPosts();
 afficherSection("feed");
