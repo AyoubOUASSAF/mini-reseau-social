@@ -1,26 +1,28 @@
 Mini-Réseau Social en Local
-Description du projet
-Ce projet consiste à développer un mini-réseau social local en HTML, CSS et JavaScript pur. L'objectif est de simuler les fonctionnalités principales d'une plateforme sociale tout en respectant un style visuel basé sur le neumorphisme.
+Description du Projet
+Ce projet consiste à développer un mini-réseau social local en HTML, CSS, et JavaScript pur. L'objectif est de simuler les fonctionnalités principales d'une plateforme sociale tout en respectant un style visuel basé sur le neumorphisme.
 
 Fonctionnalités
 Page de Feed
-Affichage des posts (texte ou photo + texte) depuis un JSON.
-Réactions aux posts avec animations de particules (Like, Dislike, Love).
-Ajout de commentaires sur les posts.
-Affichage des images en plein écran.
+Affichage des posts : Texte ou photo + texte provenant d'un JSON.
+Réactions aux posts : Like, Dislike, Love avec animations de particules.
+Commentaires : Ajout de commentaires sur les posts.
+Affichage d'images : Visualisation en plein écran des images incluses dans les posts.
 Page de Messagerie
-Liste des conversations dynamique basée sur un JSON.
-Affichage des derniers messages.
-Consultation de l'historique des messages avec détails (nom, photo, horodatage).
-Envoi de nouveaux messages ajoutés à l'interface et au JSON.
+Liste des conversations : Dynamique et basée sur un JSON.
+Derniers messages : Affichage du dernier message pour chaque conversation.
+Détails des messages :
+Consultation de l'historique des messages.
+Affichage du nom, de la photo de profil et de l'horodatage.
+Envoi de nouveaux messages : Ajoutés dynamiquement à l'interface et au JSON.
 Page de Liste d’Amis
-Liste d'amis codée en dur.
-Filtrage des amis par nom et prénom.
-Lien direct vers la messagerie.
-Réorganisation dynamique de la liste d'amis avec drag-and-drop.
+Liste codée en dur : Aucun besoin de JSON.
+Filtrage : Recherche par nom et prénom.
+Lien vers la messagerie : Accessible depuis chaque ami.
+Réorganisation : Drag-and-drop pour réordonner la liste des amis.
 Technologies Utilisées
 HTML
 CSS
 JavaScript pur
 Style
-Interface responsive et esthétique basée sur le neumorphisme.
+Interface responsive et esthétique, conçue dans un style neumorphisme.
