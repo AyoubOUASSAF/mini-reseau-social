@@ -29,14 +29,14 @@
     </aside>
 
     <main>
-          <!-- Section du fil d'actualité -->
-          <section id="feed">
+        <!-- Section du fil d'actualité -->
+        <section id="feed">
             <h2>Fil d'actualité</h2>
             <!-- Conteneur pour afficher les posts -->
             <div id="posts-container"></div>
         </section>
-          <!-- Section de la messagerie -->
-          <section id="messages" style="display: none;">
+        <!-- Section de la messagerie -->
+        <section id="messages" style="display: none;">
             <h2>Messagerie</h2>
             <!-- Bouton pour revenir à la liste des conversations -->
             <button onclick="retourConversations()" id="back-button" style="display: none;">← Retour</button>
@@ -45,6 +45,18 @@
             <!-- Conteneur pour afficher les détails d'une conversation -->
             <div id="message-details"></div>
         </section>
+       <!-- Section de la liste d'amis -->
+       <section id="friends" style="display: none;">
+        <h2>Liste d'amis</h2>
+        <!-- Barre de recherche pour filtrer les amis -->
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="friend-filter" class="search-input" placeholder="Rechercher par nom..."
+                oninput="filtrerAmis()">
+        </div>
+        <!-- Conteneur pour afficher les amis -->
+        <div id="friends-container"></div>
+    </section>
     </main>
 </body>
 

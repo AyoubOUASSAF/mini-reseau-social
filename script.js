@@ -386,9 +386,144 @@ function retourConversations() {
     backButton.style.display = "none";
 }
 
+// Affiche la liste des amis dans l'interface utilisateur
+function afficherAmis() {
+    const conteneurAmis = document.getElementById("friends-container");
+    conteneurAmis.innerHTML = ""; // Réinitialise le conteneur
+
+    donnees.amis.forEach(ami => {
+        const amiElement = document.createElement("div");
+        amiElement.className = "ami";
+
+        amiElement.innerHTML = `
+            <img src="${ami.image}" alt="${ami.nom}" class="ami-image">
+            <p>${ami.nom}</p>
+            <a href="#messages" class="message-link">💬</a> <!-- Icône pour ouvrir la messagerie -->
+        `;
+
+        // Ajoute un écouteur pour ouvrir la section de messagerie pour l'ami sélectionné
+        amiElement.querySelector(".message-link").addEventListener("click", (e) => {
+            e.preventDefault();
+            afficherSection("messages");
+            afficherConversationPourAmi(ami.nom);
+        });
+
+        conteneurAmis.appendChild(amiElement); 
+    });
+}
+
+// Affiche une conversation pour l'ami sélectionné
+function afficherConversationPourAmi(nomAmi) {
+    // Recherche une conversation correspondant au nom de l'ami
+    const conversation = donnees.conversations.find(conv => conv.user === nomAmi);
+
+    // Si une conversation existe, affiche ses détails
+    if (conversation) {
+        afficherDetailsConversation(conversation);
+    } else {
+        // Si aucune conversation n'est trouvée, affiche un message d'erreur
+        const detailsContainer = document.getElementById("message-details");
+        detailsContainer.innerHTML = `
+            <p>Aucune conversation trouvée avec ${nomAmi}</p>
+            <p>Envoyez un message pour commencer une nouvelle conversation !</p>
+        `;
+    }
+}
+
+// Filtre les amis affichés en fonction d'une recherche par nom
+function filtrerAmis() {
+    const filtre = document.getElementById("friend-filter").value.toLowerCase();
+    document.querySelectorAll("#friends-container .ami").forEach(ami => {
+        const nom = ami.querySelector("p").textContent.toLowerCase();
+        ami.style.display = nom.includes(filtre) ? "flex" : "none"; 
+    });
+}
+
+// Active la fonctionnalité de "drag and drop" pour réorganiser les amis
+function activerDragAndDrop() {
+    const container = document.getElementById("friends-container");
+    let draggedItem = null;
+    let placeholder = null;
+
+    container.querySelectorAll(".ami").forEach(ami => {
+        ami.draggable = true; 
+
+        // Lorsque le glissement commence
+        ami.addEventListener("dragstart", () => {
+            draggedItem = ami;
+            ami.classList.add("dragging");
+
+            // Crée un espace réservé pour montrer où déposer l'élément
+            placeholder = document.createElement("div");
+            placeholder.className = "placeholder";
+            placeholder.style.height = `${ami.offsetHeight}px`;
+            container.insertBefore(placeholder, ami.nextSibling);
+
+            setTimeout(() => {
+                ami.style.display = "none"; 
+            }, 0);
+        });
+
+        // Lorsque le glissement se termine
+        ami.addEventListener("dragend", () => {
+            ami.classList.remove("dragging");
+            ami.style.display = "flex"; // Réaffiche l'élément
+            ami.style.justifyContent = "space-between";
+            ami.style.alignItems = "center";
+            ami.style.gap = "0.5rem";
+
+            if (placeholder) {
+                placeholder.remove(); 
+                placeholder = null;
+            }
+            draggedItem = null;
+        });
+
+        // Lorsque l'élément est glissé au-dessus d'un autre
+        ami.addEventListener("dragover", (e) => {
+            e.preventDefault();
+
+            if (placeholder && ami !== draggedItem) {
+                const bounding = ami.getBoundingClientRect();
+                const offset = e.clientY - bounding.top;
+
+                if (offset > ami.offsetHeight / 2) {
+                    container.insertBefore(placeholder, ami.nextSibling);
+                } else {
+                    container.insertBefore(placeholder, ami);
+                }
+            }
+        });
+
+        // Lors du dépôt de l'élément
+        ami.addEventListener("drop", () => {
+            if (draggedItem !== ami && placeholder) {
+                container.insertBefore(draggedItem, placeholder); // Réorganise l'élément
+                placeholder.remove();
+                placeholder = null;
+            }
+        });
+    });
+}
+
+// Gestion de l'extension de la barre de recherche
+document.querySelector(".search-icon").addEventListener("click", () => {
+    const searchContainer = document.querySelector(".search-container");
+    searchContainer.classList.toggle("expanded");
+    const input = searchContainer.querySelector(".search-input");
+
+    if (searchContainer.classList.contains("expanded")) {
+        input.focus(); 
+    } else {
+        input.value = ""; 
+        filtrerAmis(); 
+    }
+});
 
 
 // Initialisation 
 afficherPosts();
 afficherSection("feed");
 afficherConversations();
+afficherAmis();
+activerDragAndDrop();

@@ -86,7 +86,7 @@ body {
     color: #4b0082;
 }
 
-.sidebar.collapsed + main {
+.sidebar.collapsed+main {
     margin-left: 80px;
 }
 
@@ -149,10 +149,10 @@ main {
 }
 
 .modal-content img {
-    max-width: 90vw; 
-    max-height: 90vh; 
-    width: auto; 
-    height: auto; 
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
     display: block;
     margin: auto;
     border-radius: 8px;
@@ -286,7 +286,8 @@ main {
 }
 
 /* Styles de l'input et de Bouton */
-input, button {
+input,
+button {
     border: none;
     outline: none;
     padding: 0.5rem 1rem;
@@ -295,7 +296,8 @@ input, button {
     background-color: #e6e1f7;
 }
 
-input:focus, button:focus {
+input:focus,
+button:focus {
     box-shadow: 0 0 4px #4b0082;
 }
 
@@ -323,7 +325,7 @@ input::placeholder {
     box-shadow: 4px 4px 8px #dcd6f7, -4px -4px 8px #ffffff;
     margin-bottom: 2rem;
     max-height: 400px;
-    overflow-y: auto; /* Scroll for long lists */
+    overflow-y: auto;
 }
 
 /* Élément de Conversation*/
@@ -382,7 +384,7 @@ input::placeholder {
     gap: 1rem;
     padding: 1rem;
     background-color: #f3f0ff;
-    border-radius: 10px;   
+    border-radius: 10px;
     margin-bottom: 2rem;
 }
 
@@ -419,4 +421,114 @@ input::placeholder {
 
 #back-button:hover {
     color: #6a0dad;
+}
+
+/* Élément draggable */
+.draggable {
+    cursor: move;
+    user-select: none;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+    border: 2px dashed #4b0082;
+}
+
+/* Styles généraux pour les amis */
+.ami {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #e6e1f7;
+    box-shadow: 4px 4px 8px #dcd6f7, -4px -4px 8px #ffffff;
+    margin-bottom: 1rem;
+    flex-wrap: nowrap;
+}
+
+/* Image des amis */
+.ami img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px #dcd6f7, -2px -2px 5px #ffffff;
+}
+
+/* Nom des amis */
+.ami p {
+    flex: 1;
+    margin: 0;
+    font-size: 1rem;
+    color: #4b0082;
+}
+
+/* Icône de conversation */
+.ami a {
+    color: #4b0082;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Conteneur de recherche */
+.search-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    transition: width 0.3s ease-in-out;
+    margin-bottom: 1rem;
+}
+
+/* Icône de recherche */
+.search-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6e1f7;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #dcd6f7, -2px -2px 5px #ffffff;
+    color: #4b0082;
+    z-index: 2;
+    transition: background-color 0.3s;
+}
+
+.search-icon:hover {
+    background-color: #dcd6f7;
+}
+
+/* Champ de recherche initialement masqué */
+.search-input {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    height: 40px;
+    width: calc(100% - 40px);
+    padding: 0 1rem;
+    background-color: #e6e1f7;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #dcd6f7, -2px -2px 5px #ffffff;
+    color: #4b0082;
+    outline: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, pointer-events 0.3s;
+}
+
+/* Activation du champ de recherche */
+.search-container.expanded {
+    width: 100%;
+}
+
+.search-container.expanded .search-input {
+    opacity: 1;
+    pointer-events: auto;
 }
